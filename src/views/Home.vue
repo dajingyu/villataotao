@@ -3,7 +3,7 @@
     <el-header>
       <div>致力于打造国产微量快速油品检测品牌</div>
       <!-- 多语言 主题定制等功能 -->
-      <div>多语言 主题定制</div>
+      <div>多语言 主题定制2</div>
 
     </el-header>
     <el-main>
