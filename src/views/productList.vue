@@ -5,24 +5,40 @@
     @tab-click="handleClick"
   >
     <el-tab-pane
-      label="User"
+      label="柴油分析仪器"
       name="first"
-    >User</el-tab-pane>
+    >
+      <div class="product-wrapper">
+        <div
+          class="product-class"
+          v-for="item in prodectList"
+          :key=item
+        >
+          <img
+            :src="item.path"
+            alt=""
+            srcset=""
+            class="product-img"
+          >
+        </div>
+
+      </div>
+    </el-tab-pane>
     <el-tab-pane
-      label="Config"
+      label="汽油分析仪器"
       name="second"
       lazy
-    >Config</el-tab-pane>
+    >汽油分析仪器</el-tab-pane>
     <el-tab-pane
-      label="Role"
+      label="液化气分析仪器"
       name="third"
       lazy
-    >Role</el-tab-pane>
+    >液化气分析仪器 </el-tab-pane>
     <el-tab-pane
-      label="Task"
+      label="航煤分析仪器"
       name="fourth"
       lazy
-    >Task</el-tab-pane>
+    >航煤分析仪器</el-tab-pane>
   </el-tabs>
 </template>
 
@@ -33,17 +49,45 @@ import { ref } from 'vue'
 // todo 需要给定类型any
 let activeName: any = ref('first')
 
+let prodectList: any = [
+  { path: require('../assets/product1.jpg') },
+  { path: require('../assets/product2.jpg') },
+  { path: require('../assets/product1.jpg') },
+  { path: require('../assets/product1.jpg') },
+  { path: require('../assets/product1.jpg') },
+  { path: require('../assets/product1.jpg') },
+  { path: require('../assets/product1.jpg') },
+  { path: require('../assets/product1.jpg') },
+  { path: require('../assets/product1.jpg') },
+  { path: require('../assets/product1.jpg') },
+]
 const handleClick = (tab: TabsPaneContext, event: Event) => {
   // todo 需要tab.props.name  才能拿到name的值
 
   activeName.value = tab.props.name
 }
 </script>
-<style>
+<style lang="less">
 .demo-tabs > .el-tabs__content {
   padding: 32px;
   color: #6b778c;
   font-size: 32px;
   font-weight: 600;
+}
+.product-wrapper {
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 30px 50px;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+.product-class {
+  border: 1px solid #eee;
+  height: 150px;
+  .product-img {
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>
