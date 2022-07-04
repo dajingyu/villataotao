@@ -1,32 +1,112 @@
 <template>
+  <!-- 主页 -->
+  <div class="main-wrapper">
+    <!-- 第一部分：关键数据 -->
+    <div class="margin-class  main-top-wrapper">
+      <div class="title padding-left-class">
+        <div class="width-trip"></div>
+        <div class="title-name">关键数据</div>
+      </div>
+      <div class="padding-class main-top-child-wrapper">
+        <div class="main-top-child">
+          <p>数字</p>
+          <p>月剩余金额</p>
+        </div>
+        <div class="trip"></div>
+        <div class="main-top-child">
+          <p>数字</p>
+          <p>月花费金额</p>
+        </div>
+        <div class="trip"></div>
+        <div class="main-top-child">
+          <p>数字</p>
+          <p>月储蓄金额</p>
+        </div>
+      </div>
+    </div>
+    <!-- 第二部分：常用功能 -->
+    <div class="margin-class main-center-wrapper">
+      <div class="title padding-left-class">
+        <div class="width-trip"></div>
+        <div class="title-name">常用功能</div>
+      </div>
+      <div class="padding-class">
+        功能一
 
-  <el-carousel height="559px">
-    <el-carousel-item
-      v-for="item in bannerList"
-      :key="item"
-    >
-      <img
-        :src="item.path"
-        alt=""
-        srcset=""
-        class="banner-img"
-      >
-    </el-carousel-item>
-  </el-carousel>
+      </div>
+    </div>
+    <!-- 第三部分：echarts图表 -->
+    <div class="charts-wrapper">
+      <div class="charts1">1</div>
+      <div class="charts2">2</div>
+      <div class="charts3">3</div>
+      <div class="charts4">4</div>
+
+    </div>
+  </div>
+
 </template>
 
 <script lang="ts" setup>
-let bannerList: any = [
-  { path: require('../assets/banner1.jpg') },
-  { path: require('../assets/banner2.jpg') },
-  { path: require('../assets/banner3.jpg') },
-  { path: require('../assets/banner4.jpg') },
-]
 </script>
 
-<style>
-.banner-img {
-  width: 100%;
-  height: 559px;
+<style lang="less" scoped>
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  .main-top-wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0 1px 1px 0 rgb(60 75 100 / 14%);
+    border-radius: 10px;
+  }
+
+  .main-top-child-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+  }
+  .main-center-wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0 1px 1px 0 rgb(60 75 100 / 14%);
+    border-radius: 10px;
+  }
+
+  // charts
+  .charts-wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px 20px;
+    .charts1 {
+      background-color: #fff;
+      box-shadow: 0 1px 1px 0 rgb(60 75 100 / 14%);
+      border-radius: 10px;
+      min-height: 360px;
+    }
+    .charts2 {
+      background-color: #fff;
+      box-shadow: 0 1px 1px 0 rgb(60 75 100 / 14%);
+      border-radius: 10px;
+      min-height: 360px;
+    }
+    .charts3 {
+      background-color: #fff;
+      box-shadow: 0 1px 1px 0 rgb(60 75 100 / 14%);
+      border-radius: 10px;
+      min-height: 360px;
+    }
+    .charts4 {
+      background-color: #fff;
+      box-shadow: 0 1px 1px 0 rgb(60 75 100 / 14%);
+      border-radius: 10px;
+      min-height: 360px;
+    }
+  }
 }
 </style>
