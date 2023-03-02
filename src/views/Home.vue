@@ -1,3 +1,10 @@
+<!--
+ * @Description: 
+ * @Author: xu tao
+ * @Date: 2022-08-09 14:34:42
+ * @LastEditors: xutao xutao@infinidata.cc
+ * @LastEditTime: 2023-02-02 13:37:39
+-->
 <template>
   <el-container class="wrapper">
     <el-header class="header">
@@ -30,12 +37,24 @@
         <router-view />
       </el-main>
     </el-container>
-    <!-- <el-footer class="footer flex-center">Copyright©2022大连分析仪器有限公司 版权所有 </el-footer> -->
+    <el-footer class="footer flex-center">版本1.0.0 </el-footer>
   </el-container>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onMounted, onUpdated, reactive, ref } from 'vue';
+
+// console.log(this)
+
+
+let obj = {bb:2}
+let obj2 = reactive(obj)
+onMounted(() => {
+})
+onUpdated
+// 该函数接收一个普通数字，并且
+// 将无法跟踪 state.count 的变化
+// callSomeFunction(state.count)
 
 let activeIndex = ref('main')
 const handleSelect = (key: string, keyPath: string[]) => {

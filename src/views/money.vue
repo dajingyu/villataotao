@@ -28,15 +28,13 @@
       <el-table
         :data="tableData"
         border
-        height="600"
         :summary-method="getSummaries"
         show-summary
         align="center"
       >
-        <el-table-column
-          prop="name"
-          label="名称"
-          width="180"
+      <el-table-column
+          prop="date"
+          label="日期"
         />
         <el-table-column
           prop="type"
@@ -46,10 +44,7 @@
           prop="cost"
           label="花费"
         />
-        <el-table-column
-          prop="date"
-          label="日期"
-        />
+       
 
       </el-table>
     </div>
@@ -77,12 +72,7 @@
         />
       </el-form-item>
 
-      <el-form-item label="名称">
-        <el-radio-group v-model="form.name">
-          <el-radio label="涛" />
-          <el-radio label="钰" />
-        </el-radio-group>
-      </el-form-item>
+    
 
       <el-form-item label="所属分类">
         <el-select
@@ -91,11 +81,11 @@
         >
           <el-option
             label="固定支出"
-            value="0"
+            value="固定支出"
           />
           <el-option
             label="灵活支出"
-            value="1"
+            value="灵活支出"
           />
         </el-select>
       </el-form-item>
@@ -122,12 +112,17 @@
 </template>
 
 <script lang="ts" setup>
-import type { FormInstance, FormRules } from 'element-plus'
-import type { TableColumnCtx } from 'element-plus/es/components/table/src/table-column/defaults'
-import { reactive, ref } from 'vue'
+import type { FormInstance, FormRules } from 'element-plus';
+import type { TableColumnCtx } from 'element-plus/es/components/table/src/table-column/defaults';
+import { inject, onMounted, reactive, ref } from 'vue';
+
+onMounted(() => {
+})
+
+// const  value= inject("isShow")
+
 
 interface Product {
-  name: string
   type: string
   cost: string
   date: string
@@ -146,44 +141,57 @@ const getSummaries = (param: SummaryMethodProps) => {
       sums[index] = '合计'
       return
     }
-    const values = data.map((item) => Number(item[column.property]))
+    const values = data.map((item) => {
+        
+        
+        return Number(item[column.property])
+    
+    
+    })
+
     if (!values.every((value) => Number.isNaN(value))) {
-      sums[index] = `$ ${values.reduce((prev, curr) => {
+      sums[index] = ` ${values.reduce((prev, curr) => {
         const value = Number(curr)
         if (!Number.isNaN(value)) {
           return prev + curr
         } else {
           return prev
         }
-      }, 0)}`
+      }, 0)}元`
     } else {
       sums[index] = 'N/A'
     }
+
+
   })
 
   return sums
 }
 
 // 显示花销的列表
-const tableData: Product[] = reactive([])
+const tableData: Product[] = reactive([
+{
+  type: '固定支出',
+  cost: '100',
+  date: '2023-02-02',
+},
+{
+  type: '固定支出',
+  cost: '100',
+  date: '2023-02-02',
+}
+])
 const dialogFormVisible = ref(false)
 const formLabelWidth = '140px'
 const ruleFormRef = ref<FormInstance>()
 const form = reactive({
-  name: '',
   type: '',
   cost: '',
   date: '',
 })
 
 const rules = reactive<FormRules>({
-  name: [
-    {
-      required: true,
-      message: '谁花钱了就选谁',
-      trigger: 'change',
-    },
-  ],
+
   type: [
     {
       required: true,

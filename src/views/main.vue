@@ -5,24 +5,9 @@
     <div class="margin-class  main-top-wrapper">
       <div class="title padding-left-class">
         <div class="width-trip"></div>
-        <div class="title-name">关键数据</div>
+        <div class="title-name">关键数据:{{ vals }}</div>
       </div>
-      <div class="padding-class main-top-child-wrapper">
-        <div class="main-top-child">
-          <p>数字</p>
-          <p>月剩余金额</p>
-        </div>
-        <div class="trip"></div>
-        <div class="main-top-child">
-          <p>数字</p>
-          <p>月花费金额</p>
-        </div>
-        <div class="trip"></div>
-        <div class="main-top-child">
-          <p>数字</p>
-          <p>月储蓄金额</p>
-        </div>
-      </div>
+      <showValue :count="count" :count1="count1" :count2="count2" @fatherHandler="getData"/>
     </div>
     <!-- 第二部分：常用功能 -->
     <div class="margin-class main-center-wrapper">
@@ -48,6 +33,45 @@
 </template>
 
 <script lang="ts" setup>
+import showValue from '@/views/components/showValue.vue';
+import { onMounted, provide, ref } from 'vue';
+console.log('main组件的setUp')
+let vals = ref<boolean>(false)
+    console.log(this,"setup")
+
+provide("isShow",false)
+onMounted(() => {
+  console.log('main 的 onMounted')
+  console.log(this,"onMounted")
+  
+})
+const getData = (vala:any) => {
+  console.log(vala.value,'getData')
+  vals.value= vala
+
+}
+let count = ref<number>(5555)
+
+let count1 = ref(22)
+let count2 = ref(111)
+
+setInterval(() => {
+  // count.value += 1
+  // count1.value += 1
+  count2.value += 1
+}, 1000)
+
+let flag: boolean = false
+
+flag = false
+
+// 定义数组1
+let arr: boolean[] = [false, false]
+// 定义数组2,泛型写法
+let arr2: Array<boolean> = [false, false]
+
+// 每个元素类型不一样得数组怎么办：元组
+let arr3: [boolean, string] = [false, '222']
 </script>
 
 <style lang="less" scoped>
