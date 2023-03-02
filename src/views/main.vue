@@ -43,6 +43,8 @@ provide("isShow",false)
 onMounted(() => {
   console.log('main 的 onMounted')
   console.log(this,"onMounted")
+
+  
   
 })
 const getData = (vala:any) => {
