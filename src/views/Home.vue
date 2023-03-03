@@ -3,7 +3,7 @@
  * @Author: xu tao
  * @Date: 2022-08-09 14:34:42
  * @LastEditors: xutao xutao@infinidata.cc
- * @LastEditTime: 2023-02-02 13:37:39
+ * @LastEditTime: 2023-03-03 10:20:48
 -->
 <template>
   <el-container class="wrapper">
@@ -45,7 +45,6 @@
 import { onMounted, onUpdated, reactive, ref } from 'vue';
 
 // console.log(this)
-
 
 let obj = {bb:2}
 let obj2 = reactive(obj)
