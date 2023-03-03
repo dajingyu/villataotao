@@ -138,5 +138,12 @@
   ],
   "vetur.format.scriptInitialIndent": true,
   "vetur.format.styleInitialIndent": true,
-  "vetur.validation.script": false
+  "vetur.validation.script": false,
+  // 文件头部注释
+  "fileheader.customMade": {
+    "Date": "Do not edit", // 文件创建时间(不变)
+    // 文件最后编辑者
+    "LastEditors": "git config user.name && git config user.email", 
+    "LastEditTime": "Do not edit", // 文件最后编辑时间
+  }
 }
