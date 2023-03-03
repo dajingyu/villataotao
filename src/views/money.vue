@@ -6,54 +6,29 @@
     </div>
 
     <div class="add-wrapper padding-small-class">
-
       <!-- 条件查询 -->
 
       <!-- 新增按钮 -->
 
-      <el-button
-        size="large"
-        @click="openAddDialog"
-      >
+      <el-button size="large" @click="openAddDialog">
         <el-icon style="vertical-align: middle">
           <Plus />
         </el-icon>
         <span style="vertical-align: middle"> 新增 </span>
       </el-button>
-
     </div>
 
     <!-- 花销列表 -->
     <div class="table-wrapper padding-small-class">
-      <el-table
-        :data="tableData"
-        border
-        :summary-method="getSummaries"
-        show-summary
-        align="center"
-      >
-      <el-table-column
-          prop="date"
-          label="日期"
-        />
-        <el-table-column
-          prop="type"
-          label="所属分类"
-        />
-        <el-table-column
-          prop="cost"
-          label="花费"
-        />
-       
-
+      <el-table :data="tableData" border :summary-method="getSummaries" show-summary align="center">
+        <el-table-column prop="date" label="日期" />
+        <el-table-column prop="type" label="所属分类" />
+        <el-table-column prop="cost" label="花费" />
       </el-table>
     </div>
   </div>
 
-  <el-dialog
-    v-model="dialogFormVisible"
-    title="Shipping address"
-  >
+  <el-dialog v-model="dialogFormVisible" title="Shipping address">
     <el-form
       :model="form"
       :label-width="formLabelWidth"
@@ -62,7 +37,6 @@
       status-icon
     >
       <el-form-item label="日期">
-
         <el-date-picker
           v-model="form.date"
           type="date"
@@ -72,189 +46,165 @@
         />
       </el-form-item>
 
-    
-
       <el-form-item label="所属分类">
-        <el-select
-          v-model="form.type"
-          placeholder="请选择分类"
-        >
-          <el-option
-            label="固定支出"
-            value="固定支出"
-          />
-          <el-option
-            label="灵活支出"
-            value="灵活支出"
-          />
+        <el-select v-model="form.type" placeholder="请选择分类">
+          <el-option label="固定支出" value="固定支出" />
+          <el-option label="灵活支出" value="灵活支出" />
         </el-select>
       </el-form-item>
       <el-form-item label="花费">
-        <el-input
-          v-model="form.cost"
-          placeholder="请输入花费的金额"
-        />
+        <el-input v-model="form.cost" placeholder="请输入花费的金额" />
       </el-form-item>
-
     </el-form>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取消</el-button>
-        <el-button
-          type="primary"
-          @click="save(ruleFormRef)"
-        >保存</el-button>
+        <el-button type="primary" @click="save(ruleFormRef)">保存</el-button>
         <el-button @click="resetForm(ruleFormRef)">重置</el-button>
-
       </span>
     </template>
   </el-dialog>
 </template>
 
 <script lang="ts" setup>
-import type { FormInstance, FormRules } from 'element-plus';
-import type { TableColumnCtx } from 'element-plus/es/components/table/src/table-column/defaults';
-import { inject, onMounted, reactive, ref } from 'vue';
+  import type { FormInstance, FormRules } from 'element-plus';
+  import type { TableColumnCtx } from 'element-plus/es/components/table/src/table-column/defaults';
+  import { inject, onMounted, reactive, ref } from 'vue';
 
-onMounted(() => {
-})
+  onMounted(() => {});
 
-// const  value= inject("isShow")
+  const value = inject('isShow');
 
+  console.log(value);
 
-interface Product {
-  type: string
-  cost: string
-  date: string
-}
+  interface Product {
+    type: string;
+    cost: string;
+    date: string;
+  }
 
-interface SummaryMethodProps<T = Product> {
-  columns: TableColumnCtx<T>[]
-  data: T[]
-}
+  interface SummaryMethodProps<T = Product> {
+    columns: TableColumnCtx<T>[];
+    data: T[];
+  }
 
-const getSummaries = (param: SummaryMethodProps) => {
-  const { columns, data } = param
-  const sums: string[] = []
-  columns.forEach((column, index) => {
-    if (index === 0) {
-      sums[index] = '合计'
-      return
-    }
-    const values = data.map((item) => {
-        
-        
-        return Number(item[column.property])
-    
-    
-    })
+  const getSummaries = (param: SummaryMethodProps) => {
+    const { columns, data } = param;
+    const sums: string[] = [];
+    columns.forEach((column, index) => {
+      if (index === 0) {
+        sums[index] = '合计';
+        return;
+      }
+      const values = data.map((item) => {
+        return Number(item[column.property]);
+      });
 
-    if (!values.every((value) => Number.isNaN(value))) {
-      sums[index] = ` ${values.reduce((prev, curr) => {
-        const value = Number(curr)
-        if (!Number.isNaN(value)) {
-          return prev + curr
-        } else {
-          return prev
-        }
-      }, 0)}元`
-    } else {
-      sums[index] = 'N/A'
-    }
+      if (!values.every((value) => Number.isNaN(value))) {
+        sums[index] = ` ${values.reduce((prev, curr) => {
+          const value = Number(curr);
+          if (!Number.isNaN(value)) {
+            return prev + curr;
+          } else {
+            return prev;
+          }
+        }, 0)}元`;
+      } else {
+        sums[index] = 'N/A';
+      }
+    });
 
+    return sums;
+  };
 
-  })
-
-  return sums
-}
-
-// 显示花销的列表
-const tableData: Product[] = reactive([
-{
-  type: '固定支出',
-  cost: '100',
-  date: '2023-02-02',
-},
-{
-  type: '固定支出',
-  cost: '100',
-  date: '2023-02-02',
-}
-])
-const dialogFormVisible = ref(false)
-const formLabelWidth = '140px'
-const ruleFormRef = ref<FormInstance>()
-const form = reactive({
-  type: '',
-  cost: '',
-  date: '',
-})
-
-const rules = reactive<FormRules>({
-
-  type: [
+  // 显示花销的列表
+  const tableData: Product[] = reactive([
     {
-      required: true,
-      message: '请选择一个分类',
-      trigger: 'change',
+      type: '固定支出',
+      cost: '100',
+      date: '2023-02-02',
     },
-  ],
-  cost: [
     {
-      required: true,
-      message: '请填写金额',
-      trigger: 'change',
+      type: '固定支出',
+      cost: '100',
+      date: '2023-02-02',
     },
-  ],
-  date: [
-    {
-      type: 'date',
-      required: true,
-      message: '哪天花的钱？',
-      trigger: 'change',
-    },
-  ],
-})
+  ]);
+  const dialogFormVisible = ref(false);
+  const formLabelWidth = '140px';
+  const ruleFormRef = ref<FormInstance>();
+  const form = reactive({
+    type: '',
+    cost: '',
+    date: '',
+  });
 
-// 打开弹窗
-const openAddDialog = () => {
-  dialogFormVisible.value = true
-}
+  const rules = reactive<FormRules>({
+    type: [
+      {
+        required: true,
+        message: '请选择一个分类',
+        trigger: 'change',
+      },
+    ],
+    cost: [
+      {
+        required: true,
+        message: '请填写金额',
+        trigger: 'change',
+      },
+    ],
+    date: [
+      {
+        type: 'date',
+        required: true,
+        message: '哪天花的钱？',
+        trigger: 'change',
+      },
+    ],
+  });
 
-const save = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  await formEl.validate((valid, fields) => {
-    if (valid) {
-      console.log(form)
-      tableData.push(form)
-      console.log(tableData)
+  // 打开弹窗
+  const openAddDialog = () => {
+    dialogFormVisible.value = true;
+  };
 
-      dialogFormVisible.value = false
-    } else {
-      console.log('error submit!', fields)
-    }
-  })
-}
-const resetForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  formEl.resetFields()
-}
+  const save = async (formEl: FormInstance | undefined) => {
+    if (!formEl) return;
+    await formEl.validate((valid, fields) => {
+      if (valid) {
+        console.log(form);
+        tableData.push(form);
+        console.log(tableData);
+
+        dialogFormVisible.value = false;
+      } else {
+        console.log('error submit!', fields);
+      }
+    });
+  };
+  const resetForm = (formEl: FormInstance | undefined) => {
+    if (!formEl) return;
+    formEl.resetFields();
+  };
 </script>
 <style lang="less">
-.money-wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  .add-wrapper {
-    margin-top: 20px;
-    text-align: left;
-    background-color: #fff;
-  }
-  .table-wrapper {
-    margin-top: 20px;
-    flex: 1;
-    background-color: #fff;
+  .money-wrapper {
+    display: flex;
+    flex-direction: column;
     min-height: 100%;
+
+    .add-wrapper {
+      margin-top: 20px;
+      text-align: left;
+      background-color: #fff;
+    }
+
+    .table-wrapper {
+      margin-top: 20px;
+      flex: 1;
+      background-color: #fff;
+      min-height: 100%;
+    }
   }
-}
 </style>
