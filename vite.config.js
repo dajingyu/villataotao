@@ -5,48 +5,40 @@
  * @LastEditors: xu tao
  * @LastEditTime: 2022-08-11 14:03:33
  */
-import vue from "@vitejs/plugin-vue";
-import { resolve } from "path";
-import { defineConfig } from "vite";
+import vue from '@vitejs/plugin-vue';
+import { resolve } from 'path';
+import { defineConfig } from 'vite';
 
-import AutoImport from "unplugin-auto-import/vite";
-import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
-import Components from "unplugin-vue-components/vite";
+import AutoImport from 'unplugin-auto-import/vite';
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import Components from 'unplugin-vue-components/vite';
 function pathResolve(dir) {
-  return resolve(
-    __dirname,
-    ".",
-    dir
-  );
+  return resolve(__dirname, '.', dir);
 }
 
 export default defineConfig({
-  base: "",
+  base: '',
   plugins: [
     vue(),
     AutoImport({
-      imports: ["vue"],
-      resolvers: [
-        ElementPlusResolver(),
-      ],
+      imports: ['vue'],
+      resolvers: [ElementPlusResolver()],
     }),
     Components({
-      resolvers: [
-        ElementPlusResolver(),
-      ],
+      resolvers: [ElementPlusResolver()],
     }),
   ],
   // 配置文件别名
   resolve: {
     alias: {
-      "@": pathResolve("src"),
+      '@': pathResolve('src'),
     },
   },
   // 打包配置
   build: {
-    target: "modules",
-    outDir: "dist", //指定输出路径
-    assetsDir: "static", // 指定生成静态资源的存放路径
+    target: 'modules',
+    outDir: 'dist', //指定输出路径
+    assetsDir: 'static', // 指定生成静态资源的存放路径
   },
   // 本地运行配置，及反向代理配置
   server: {

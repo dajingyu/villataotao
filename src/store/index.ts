@@ -1,10 +1,13 @@
-import type { App } from 'vue';
-import { createPinia } from 'pinia';
+/*
+ * @Date: 2022-08-09 14:34:42
+ * @LastEditors: xutao xutao@infinidata.cc
+ * @LastEditTime: 2023-03-06 15:11:49
+ */
+import { createStore } from 'vuex';
 
-const store = createPinia();
-
-export function setupStore(app: App<Element>) {
-  app.use(store);
-}
-
-export { store };
+export default createStore({
+  state: {},
+  mutations: {},
+  actions: {},
+  modules: {},
+});
