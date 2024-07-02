@@ -1,13 +1,24 @@
 /*
- * @Date: 2022-08-09 14:34:42
- * @LastEditors: xutao xutao@infinidata.cc
- * @LastEditTime: 2023-03-06 15:11:49
+ * @Date: 2022-06-25 14:04:19
+ * @LastEditors: tao.xu
+ * @LastEditTime: 2023-01-30 17:22:08
+ * @Description: 文件信息
  */
-import { createStore } from 'vuex';
+import { defineStore } from 'pinia'
 
-export default createStore({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {},
-});
+export const mainStore = defineStore('main', {
+  state: () => {
+    return {
+      helloWorld: 'pinia变量',
+      count:0
+
+    }
+  },
+  getters: {},
+  actions: {
+    changeState(){
+      this.count++,
+      this.helloWorld = this.helloWorld + '@'
+    }
+  }
+})

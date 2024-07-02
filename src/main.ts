@@ -1,19 +1,33 @@
 /*
- * @Date: 2022-08-09 14:34:42
- * @LastEditors: xutao xutao@infinidata.cc
- * @LastEditTime: 2023-03-06 15:13:34
+ * @Date: 2022-06-25 14:04:19
+ * @LastEditors: tao.xu
+ * @LastEditTime: 2023-01-30 16:35:03
+ * @Description: 文件信息
  */
-// import * as ElementPlusIconsVue from '@element-plus/icons-vue';
-import ElementPlus from 'element-plus';
-import 'element-plus/dist/index.css';
-import { createApp } from 'vue';
-import App from './App.vue';
-import router from './router';
-import store from './store';
-import './style/home.less';
-const app = createApp(App);
-app.use(ElementPlus, { size: 'small', zIndex: 3000 });
-// for (const [key, components] of Object.entries(ElementPlusIconsVue)) {
-//   app.component(key, components);
-// }
-app.use(store).use(router).use(ElementPlus).mount('#app');
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import ElementPlus from 'element-plus'
+
+
+import 'element-plus/dist/index.css'
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
+// import store from './store'
+import { createPinia } from 'pinia'
+import './style/home.less'
+const pinia = createPinia()
+
+const app = createApp(App)
+// 创建pinia 实例
+
+app.use(ElementPlus, { size: 'small', zIndex: 3000 })
+// 挂载到 Vue 根实例上
+app.use(pinia);
+// 使用element 图标
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  app.component(key, component)
+}
+app.use(router).mount('#app')
+
+
+
