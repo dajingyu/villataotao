@@ -1,22 +1,21 @@
 <template>
-  <div class="money-wrapper padding-small-class">
-    <div class="title padding-left-class">
-      <div class="width-trip"></div>
+  <div
+    class="money-wrapper padding-small-class"
+  >
+    <div
+      class="title padding-left-class"
+    >
+      <div
+        class="width-trip"
+      ></div>
       <div class="title-name">
         新增花销
-
-
-
-
-
-
-
-
-
       </div>
     </div>
 
-    <div class="add-wrapper padding-small-class">
+    <div
+      class="add-wrapper padding-small-class"
+    >
       <!-- 条件查询 -->
 
       <!-- 新增按钮 -->
@@ -25,21 +24,27 @@
         size="large"
         @click="openAddDialog"
       >
-        <el-icon style="
-              vertical-align: middle;
-            ">
+        <el-icon
+          style="
+            vertical-align: middle;
+          "
+        >
           <Plus />
         </el-icon>
-        <span style="
-              vertical-align: middle;
-            ">
+        <span
+          style="
+            vertical-align: middle;
+          "
+        >
           新增
         </span>
       </el-button>
     </div>
 
     <!-- 花销列表 -->
-    <div class="table-wrapper padding-small-class">
+    <div
+      class="table-wrapper padding-small-class"
+    >
       <el-table
         :data="tableData"
         border
@@ -90,7 +95,9 @@
       :rules="rules"
       status-icon
     >
-      <el-form-item label="日期">
+      <el-form-item
+        label="日期"
+      >
         <el-date-picker
           v-model="form.date"
           type="date"
@@ -100,14 +107,24 @@
         />
       </el-form-item>
 
-      <el-form-item label="名称">
-        <el-radio-group v-model="form.name">
-          <el-radio label="涛" />
-          <el-radio label="钰" />
+      <el-form-item
+        label="名称"
+      >
+        <el-radio-group
+          v-model="form.name"
+        >
+          <el-radio
+            label="涛"
+          />
+          <el-radio
+            label="钰"
+          />
         </el-radio-group>
       </el-form-item>
 
-      <el-form-item label="所属分类">
+      <el-form-item
+        label="所属分类"
+      >
         <el-select
           v-model="form.type"
           placeholder="请选择分类"
@@ -122,7 +139,9 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="花费">
+      <el-form-item
+        label="花费"
+      >
         <el-input
           v-model="form.cost"
           placeholder="请输入花费的金额"
@@ -130,36 +149,51 @@
       </el-form-item>
     </el-form>
     <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="
-          dialogFormVisible = false
-        ">取消</el-button>
+      <span
+        class="dialog-footer"
+      >
+        <el-button
+          @click="
+            dialogFormVisible = false
+          "
+          >取消</el-button
+        >
         <el-button
           type="primary"
           @click="
             save(ruleFormRef)
           "
-        >保存</el-button>
-        <el-button @click="
-          resetForm(
-            ruleFormRef
-          )
-        ">重置</el-button>
+          >保存</el-button
+        >
+        <el-button
+          @click="
+            resetForm(
+              ruleFormRef
+            )
+          "
+          >重置</el-button
+        >
       </span>
     </template>
   </el-dialog>
 </template>
 
 <script lang="ts" setup>
-import type { FormInstance, FormRules } from 'element-plus';
-import type { TableColumnCtx } from 'element-plus/es/components/table/src/table-column/defaults';
-import { reactive, ref } from 'vue';
+import type {
+  FormInstance,
+  FormRules,
+} from "element-plus";
+import type { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
+import {
+  reactive,
+  ref,
+} from "vue";
 
 interface Product {
-  name: string
-  type: string
-  cost: string
-  date: string
+  name: string;
+  type: string;
+  cost: string;
+  date: string;
 }
 
 interface SummaryMethodProps<
@@ -194,7 +228,7 @@ const getSummaries = (
         (item) =>
           Number(
             item[
-            column.property
+              column.property
             ]
           )
       );
